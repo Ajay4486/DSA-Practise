@@ -18,26 +18,30 @@ class Solution{
 
 
 //Rotate Array by D places.
-class Solution{   
+class Solution {
 public:
-    void leftRotate(int arr[], int n, int d) {
-        // code here
-        d = d%n;
-       
-        int temp[d];
-        for(int i=0;i<d;i++)
-        {
-            temp[i]=arr[i];
-        }
-        
-        for(int i=d;i<n;i++)
-        {
-            arr[i-d]=arr[i];
-        }
-        
-        for(int i = n - d ;i<n; i++)
-        {
-            arr[i]=temp[i-(n-d)];
+    void rotate(vector<int>& nums, int k) {
+        int n = nums.size();
+        k = k % n;
+
+        // Rotate the entire array
+        rotateArray(nums, 0, n - 1);
+
+        // Rotate the first k elements
+        rotateArray(nums, 0, k - 1);
+
+        // Rotate the remaining elements
+        rotateArray(nums, k, n - 1);
+    }
+
+private:
+    void rotateArray(vector<int>& nums, int left, int right) {
+        while (left < right) {
+            int temp = nums[left];
+            nums[left] = nums[right];
+            nums[right] = temp;
+            left++;
+            right--;
         }
     }
 };
